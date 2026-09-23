@@ -34,7 +34,9 @@ awk '/<script>/{f=1;next}/<\/script>/{f=0}f' index.html > /tmp/app.js && node --
   --window-size=1440,1100 --screenshot=/tmp/desk.png "file://$PWD/index.html"
 
 # Interactive browser testing: the project-level Playwright MCP server (.mcp.json) can
-# open file://$PWD/index.html or the live Pages URL and click, drag, fill forms and screenshot
+# open file://$PWD/index.html or the live Pages URL and click, drag, fill forms and screenshot.
+# For drag tests, resize the browser to at least 1440x1100 first: Playwright scrolls the drop target into
+# view mid-drag, so in a short viewport the wrong card ends up under the pointer and gets moved.
 
 # Guard against forbidden APIs/URLs (should only match the FormSubmit URL)
 grep -nE "localStorage|sessionStorage|indexedDB|document\.cookie|https?://|!important|alert\(|confirm\(" index.html

@@ -12,3 +12,6 @@ node_modules/
 
 # Personal Claude Code settings (project commands in .claude/commands are shared)
 .claude/settings.local.json
+
+# Playwright MCP snapshots, console logs and screenshots
+.playwright-mcp/
