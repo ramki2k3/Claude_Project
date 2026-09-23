@@ -33,6 +33,9 @@ awk '/<script>/{f=1;next}/<\/script>/{f=0}f' index.html > /tmp/app.js && node --
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu \
   --window-size=1440,1100 --screenshot=/tmp/desk.png "file://$PWD/index.html"
 
+# Interactive browser testing: the project-level Playwright MCP server (.mcp.json) can
+# open file://$PWD/index.html or the live Pages URL and click, drag, fill forms and screenshot
+
 # Guard against forbidden APIs/URLs (should only match the FormSubmit URL)
 grep -nE "localStorage|sessionStorage|indexedDB|document\.cookie|https?://|!important|alert\(|confirm\(" index.html
 ```
