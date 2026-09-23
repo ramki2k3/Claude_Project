@@ -61,6 +61,8 @@ grep -nE "localStorage|sessionStorage|indexedDB|document\.cookie|https?://|!impo
 - FormSubmit can return HTTP 200 with `success: "false"`. `notifyNewTask()` treats that as a failure.
 - The placeholder address `YOUR_EMAIL@example.com` is intentional in the repo.
 
-## Git
+## Git & deployment
+
+`.github/workflows/pages.yml` deploys to GitHub Pages (https://ramki2k3.github.io/Claude_Project/) on every push to `main`. It publishes only `index.html`, so any new asset the app needs must be copied into `_site` in that workflow.
 
 The remote is `git@github.com:ramki2k3/Claude_Project.git`. Use SSH: HTTPS pushes on this machine authenticate as a different GitHub account and fail with 403.

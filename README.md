@@ -6,6 +6,10 @@ A single-page Kanban board for tracking IT project tasks, built as an **internal
 
 ## Quick start
 
+**Live demo:** https://ramki2k3.github.io/Claude_Project/
+
+To run it yourself:
+
 1. Download or clone this repo.
 2. Double-click **`index.html`** to open it in any modern browser.
 
