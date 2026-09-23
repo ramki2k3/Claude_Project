@@ -1,5 +1,5 @@
 ---
-description: Security-scan, then push this project to a GitHub repo, update README + repo About section, and deploy GitHub Pages via Actions
+description: Security-scan, then push this project to a GitHub repo, deploy GitHub Pages via Actions, add Playwright screenshots of the live site to the README, and update the repo About section
 argument-hint: <github repo URL or owner/repo> [extra notes]
 ---
 
@@ -7,7 +7,7 @@ argument-hint: <github repo URL or owner/repo> [extra notes]
 
 Target repo and notes from the user: **$ARGUMENTS**
 
-Work through the steps below in order. **Step 3 (security scan) is a hard gate:** nothing leaves this machine until it passes. Keep the user posted with one short line per step, and finish with the report in step 8.
+Work through the steps below in order. **Step 3 (security scan) is a hard gate:** nothing leaves this machine until it passes. Keep the user posted with one short line per step, and finish with the report in step 9.
 
 General rules for this command:
 - Push over **SSH** (`git@github.com:<owner>/<repo>.git`). On this machine the saved HTTPS credentials belong to a different GitHub account, so HTTPS pushes fail with 403.
@@ -71,7 +71,7 @@ Result:
 - **Existing `README.md`:** read it and update only what's stale or missing. Keep the user's own wording and structure.
 - **No README:** create one for people visiting the repo. Include:
   - title and one-line summary
-  - screenshot, if the app can be rendered (see the headless Chrome command in `CLAUDE.md`, and save it under `docs/`)
+  - screenshots under `docs/` (captured from the live site in step 7; on a first run, leave a placeholder spot and fill it in at step 7)
   - live-demo link: `https://OWNER.github.io/REPO/` (for a repo named `OWNER.github.io`, it's `https://OWNER.github.io/`)
   - quick start, features, and configuration (e.g. `FORMSUBMIT_ENDPOINT` plus the FormSubmit activation step)
   - limitations
@@ -106,7 +106,26 @@ Result:
 5. **Verify the site:** poll the Pages URL (not the API) with a bounded loop, for example up to 3 minutes: `curl -s -o /dev/null -w '%{http_code}'` until it returns 200. Then confirm the served page matches the local file, e.g. `curl -s <url> | diff -q - index.html`.
    - **If it fails:** fetch the latest run's failed step once via `/actions/runs?per_page=1` and its jobs, and explain the error in plain words. "Get Pages site failed / Not Found" means Pages isn't enabled with Source set to GitHub Actions.
 
-## 7. Repo "About" section
+## 7. Screenshots of the live site (Playwright MCP)
+
+Use the project-level Playwright MCP server (`.mcp.json`, tools `mcp__playwright__*`) to capture the **deployed** site, so the README shows what visitors actually get.
+
+1. If the `mcp__playwright__*` tools aren't available in this session, tell the user to reload VS Code (or restart Claude Code) and approve the project MCP server "playwright". Until then, fall back to the headless Chrome command in `CLAUDE.md`, capturing the local file at 1440×900.
+2. Capture:
+   1. `browser_resize` to **1440×900**, `browser_navigate` to the Pages URL, then `browser_take_screenshot` with `filename: "docs/screenshot.png"` and `scale: "css"`. Take it straight after loading, with no dialogs open and no filters set, so the seed data shows.
+   2. `browser_resize` to **390×844**, then `browser_take_screenshot` with `filename: "docs/screenshot-mobile.png"`.
+   3. `browser_close`.
+3. **Look at both images** with the Read tool before using them. Check for missing styles, an error page, a half-loaded page or an open dialog, and retake if needed.
+4. Make sure the README shows them near the top:
+   - the desktop image, with alt text describing what it shows
+   - the mobile image inside a collapsed `<details>` block, displayed at 300px wide
+   - a one-line caption saying they were captured from the live site with Playwright
+
+   Don't add duplicates if they're already there. Just replacing the image files updates the README.
+5. The PNGs become public, so check them visually for personal data (real names, emails or tokens typed into the page). The seed data is fictional, so it's fine.
+6. Make sure `.playwright-mcp/` is in `.gitignore`; it holds the MCP's snapshots and logs. Then commit and push the images and the README (step 5).
+
+## 8. Repo "About" section
 
 Aim for these values:
 - **Description:** one sentence from the README summary, 350 characters maximum.
@@ -116,10 +135,15 @@ Aim for these values:
 Apply them with the first option that works:
 1. **`gh` installed and authenticated as someone with admin rights** (`gh auth status`):
    - `gh repo edit OWNER/REPO --description "…" --homepage "…" --add-topic a --add-topic b`
-2. **`GITHUB_TOKEN` (or `GH_TOKEN`) set in the environment:**
-   - `curl -X PATCH -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/OWNER/REPO -d '{"description":"…","homepage":"…"}'`
+2. **A token is available**, checked in this order:
+   - the `GITHUB_TOKEN` or `GH_TOKEN` environment variable
+   - the macOS Keychain entry `claude-github-pat`: `TOKEN=$(security find-generic-password -s claude-github-pat -w)`, used inside the same command
+
+   With the token, run:
+   - `curl -X PATCH -H "Authorization: Bearer $TOKEN" https://api.github.com/repos/OWNER/REPO -d '{"description":"…","homepage":"…"}'`
    - then `PUT /repos/OWNER/REPO/topics` with `{"names":[…]}`
-   - Never print the token or write it to any file.
+
+   Never print the token or write it to any file. The token needs **Administration: Read and write** on the repo.
 3. **Neither is available** (SSH can't edit repo settings). Give the user the exact text to paste:
    1. Open `https://github.com/OWNER/REPO`.
    2. On the right side of the Code tab, click the ⚙️ gear next to **About**.
@@ -128,12 +152,13 @@ Apply them with the first option that works:
 
 Afterwards, verify with one `curl -s https://api.github.com/repos/OWNER/REPO` call and check `description`, `homepage` and `topics`.
 
-## 8. Final report
+## 9. Final report
 
 Reply with:
 - **Security scan:** passed, or what was found and what was done about it.
 - **Commits pushed:** short hashes and one-line summaries.
 - **README:** created or updated, and what changed.
+- **Screenshots:** captured from the live site, or why not.
 - **About section:** applied automatically, or the values the user still needs to paste.
 - **GitHub Pages:** the live URL and whether it was verified, or the exact remaining step for the user.
 - **Anything waiting on the user:** each item as a numbered step.

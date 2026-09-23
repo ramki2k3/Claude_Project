@@ -2,7 +2,16 @@
 
 A single-page Kanban board for tracking IT project tasks, built as an **internal demo / training tool**. It is not an official UOB system and uses no UOB logos or trademarks.
 
-![Kanban board screenshot](docs/screenshot.png)
+![Kanban board on desktop, showing the four columns with sample tasks](docs/screenshot.png)
+
+<details>
+<summary>Mobile view (390px)</summary>
+
+<img src="docs/screenshot-mobile.png" alt="Kanban board on a phone-width screen, with the columns stacked" width="300">
+
+</details>
+
+<sub>Screenshots of the live site, captured with the Playwright MCP server.</sub>
 
 ## Quick start
 

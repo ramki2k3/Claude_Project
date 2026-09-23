@@ -68,7 +68,7 @@ grep -nE "localStorage|sessionStorage|indexedDB|document\.cookie|https?://|!impo
 
 ## Git & deployment
 
-`/publish-github <owner/repo>` (`.claude/commands/publish-github.md`) runs the full publish flow: security scan (gate), push, README, repo About section, Pages workflow and live-site check.
+`/publish-github <owner/repo>` (`.claude/commands/publish-github.md`) runs the full publish flow: security scan (gate), push, README, Pages workflow and live-site check, Playwright screenshots of the live site, repo About section.
 
 `.github/workflows/pages.yml` deploys to GitHub Pages (https://ramki2k3.github.io/Claude_Project/) on every push to `main`. It publishes only `index.html`, so any new asset the app needs must be copied into `_site` in that workflow.
 
