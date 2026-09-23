@@ -1,0 +1,14 @@
+# Secrets and credentials — never publish
+.env
+.env.*
+*.pem
+*.key
+*.p12
+id_rsa*
+
+# OS / tooling
+.DS_Store
+node_modules/
+
+# Personal Claude Code settings (project commands in .claude/commands are shared)
+.claude/settings.local.json

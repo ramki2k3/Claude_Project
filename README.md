@@ -53,6 +53,10 @@ python3 -m http.server
 - Nothing is saved in the browser: no local storage and no cookies.
 - Everything typed into the form is escaped before it is shown on the page.
 
+## Deployment
+
+The live demo is hosted on GitHub Pages. Every push to `main` runs the **Deploy to GitHub Pages** workflow in `.github/workflows/pages.yml`, which publishes only `index.html`. The update is usually live within a minute.
+
 ## Making the board persistent
 
 Saving the board would need a small backend with a database, plus API calls from the add, move and delete actions. The server would also need to issue task IDs so different users don't get clashing ones. In the code, all tasks already live in one `state.tasks` array, which is the single place to load from and save to.
