@@ -30,11 +30,13 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v6
 
-      # Publish only the app itself, not README / CLAUDE.md / docs.
+      # Publish only the apps themselves, not README / CLAUDE.md / docs.
+      # Kanban board at the site root; software-development website at /website/.
       - name: Assemble site
         run: |
-          mkdir -p _site
+          mkdir -p _site/website
           cp index.html _site/
+          cp website/index.html _site/website/
           touch _site/.nojekyll
 
       - name: Upload artifact

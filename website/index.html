@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ramki Software Solutions</title>
+  <meta name="description" content="Custom web and mobile software development. Training demo site.">
+  <style>
+    /* ===== Tokens ===== */
+    :root {
+      --primary: #1d4ed8;
+      --primary-dark: #1e3a8a;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #ffffff;
+      --bg-alt: #f3f4f6;
+      --border: #e5e7eb;
+      --error: #b91c1c;
+      --success: #15803d;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    /* ===== Base ===== */
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--font); color: var(--text); background: var(--bg); line-height: 1.6; }
+    h1, h2, h3 { margin: 0 0 12px; line-height: 1.25; }
+    p { margin: 0 0 12px; }
+    a { color: var(--primary); }
+    :focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 64px 0; }
+    .section-title { text-align: center; font-size: 1.9rem; }
+    .section-intro { text-align: center; color: var(--muted); margin-bottom: 36px; }
+    .btn { display: inline-block; padding: 12px 24px; border: none; border-radius: 6px; background: var(--primary); color: #fff; font-size: 1rem; font-weight: 600; text-decoration: none; cursor: pointer; }
+    .btn:hover { background: var(--primary-dark); }
+    .btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+    /* ===== Header ===== */
+    header { background: var(--primary-dark); color: #fff; }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 64px; flex-wrap: wrap; gap: 8px; }
+    .logo { font-size: 1.2rem; font-weight: 700; }
+    .nav ul { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0; }
+    .nav a { color: #fff; text-decoration: none; }
+    .nav a:hover { text-decoration: underline; }
+
+    /* ===== Hero ===== */
+    .hero { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; text-align: center; padding: 96px 0; }
+    .hero h1 { font-size: 2.6rem; }
+    .hero p { font-size: 1.15rem; max-width: 640px; margin: 0 auto 28px; opacity: 0.92; }
+    .hero .btn { background: #fff; color: var(--primary-dark); }
+    .hero .btn:hover { background: #e0e7ff; }
+
+    /* ===== Services ===== */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .service { padding: 24px; border: 1px solid var(--border); border-radius: 8px; }
+    .service h3 { color: var(--primary-dark); }
+
+    /* ===== Testimonials ===== */
+    .testimonials { background: var(--bg-alt); }
+    .testimonial { background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .testimonial blockquote { margin: 0 0 16px; font-style: italic; }
+    .testimonial .who { font-weight: 700; margin: 0; }
+    .testimonial .role { color: var(--muted); font-size: 0.9rem; margin: 0; }
+    .sample-note { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 20px; }
+
+    /* ===== Enquiry form ===== */
+    .enquiry form { max-width: 640px; margin: 0 auto; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-weight: 600; margin-bottom: 4px; }
+    .field input, .field select, .field textarea { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 6px; font: inherit; }
+    .field textarea { min-height: 120px; resize: vertical; }
+    .field [aria-invalid="true"] { border-color: var(--error); }
+    .error { color: var(--error); font-size: 0.85rem; min-height: 1.2em; margin: 4px 0 0; }
+    .form-status { margin-top: 16px; font-weight: 600; }
+    .form-status.ok { color: var(--success); }
+    .form-status.fail { color: var(--error); }
+
+    /* ===== Footer ===== */
+    footer { background: #111827; color: #d1d5db; text-align: center; padding: 28px 0; font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .grid-3 { grid-template-columns: 1fr; }
+      .hero { padding: 64px 0; }
+      .hero h1 { font-size: 2rem; }
+      .nav ul { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="container nav">
+      <div class="logo">Ramki Software Solutions</div>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#enquiry">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <h1 id="hero-title">We Build Software That Grows Your Business</h1>
+        <p>Custom web applications, mobile apps and cloud solutions, designed and delivered by an experienced development team.</p>
+        <a class="btn" href="#enquiry">Get a Free Quote</a>
+      </div>
+    </section>
+
+    <!-- ===== Services ===== -->
+    <section id="services" aria-labelledby="services-title">
+      <div class="container">
+        <h2 class="section-title" id="services-title">Our Services</h2>
+        <p class="section-intro">End-to-end software development for startups and enterprises.</p>
+        <div class="grid-3">
+          <div class="service">
+            <h3>Web Applications</h3>
+            <p>Fast, secure and scalable web apps built with modern frameworks.</p>
+          </div>
+          <div class="service">
+            <h3>Mobile Apps</h3>
+            <p>iOS and Android apps that your customers will love to use.</p>
+          </div>
+          <div class="service">
+            <h3>Cloud &amp; DevOps</h3>
+            <p>Cloud migration, CI/CD pipelines and managed infrastructure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Testimonials ===== -->
+    <section id="testimonials" class="testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <h2 class="section-title" id="testimonials-title">What Our Clients Say</h2>
+        <p class="section-intro">Trusted by businesses across the region.</p>
+        <div class="grid-3">
+          <figure class="testimonial">
+            <blockquote>"They rebuilt our booking system in eight weeks. Online bookings went up and support calls went down."</blockquote>
+            <figcaption><p class="who">Sarah Tan</p><p class="role">Operations Manager, Retail</p></figcaption>
+          </figure>
+          <figure class="testimonial">
+            <blockquote>"Clear communication, weekly demos and no surprises on the invoice. Our mobile app launched on time."</blockquote>
+            <figcaption><p class="who">Daniel Wong</p><p class="role">Founder, Logistics Startup</p></figcaption>
+          </figure>
+          <figure class="testimonial">
+            <blockquote>"Moving our servers to the cloud cut hosting costs and our deployments now take minutes, not days."</blockquote>
+            <figcaption><p class="who">Priya Menon</p><p class="role">IT Director, Healthcare</p></figcaption>
+          </figure>
+        </div>
+        <p class="sample-note">Sample testimonials for this training demo.</p>
+      </div>
+    </section>
+
+    <!-- ===== Enquiry form (FormSubmit AJAX) ===== -->
+    <section id="enquiry" class="enquiry" aria-labelledby="enquiry-title">
+      <div class="container">
+        <h2 class="section-title" id="enquiry-title">Send Us an Enquiry</h2>
+        <p class="section-intro">Tell us about your project and we will reply within one working day.</p>
+        <form id="enquiry-form" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required aria-describedby="name-error">
+            <p class="error" id="name-error"></p>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-error">
+            <p class="error" id="email-error"></p>
+          </div>
+          <div class="field">
+            <label for="service">Service</label>
+            <select id="service" name="service">
+              <option>Web Application</option>
+              <option>Mobile App</option>
+              <option>Cloud &amp; DevOps</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Project details</label>
+            <textarea id="message" name="message" required aria-describedby="message-error"></textarea>
+            <p class="error" id="message-error"></p>
+          </div>
+          <button class="btn" type="submit" id="enquiry-submit">Send Enquiry</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Ramki Software Solutions. Training demo site built with Claude Code.</p>
+    </div>
+  </footer>
+
+  <!--
+    FormSubmit needs a one-time activation: the first enquiry sends a confirmation email
+    to the address below, and nothing is delivered until its link is clicked.
+  -->
+  <script>
+    "use strict";
+
+    /* ===== CONFIG — change the enquiry email address here ===== */
+    const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/YOUR_EMAIL@example.com";
+
+    const form = document.getElementById("enquiry-form");
+    const statusEl = document.getElementById("form-status");
+    const submitBtn = document.getElementById("enquiry-submit");
+
+    function setError(id, message) {
+      const field = document.getElementById(id);
+      document.getElementById(`${id}-error`).textContent = message;
+      if (message) field.setAttribute("aria-invalid", "true");
+      else field.removeAttribute("aria-invalid");
+    }
+
+    function validate(data) {
+      const errors = {};
+      if (!data.name) errors.name = "Please enter your name.";
+      if (!data.email) errors.email = "Please enter your email.";
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.email = "Please enter a valid email address.";
+      if (!data.message) errors.message = "Please tell us about your project.";
+      ["name", "email", "message"].forEach((key) => setError(key, errors[key] || ""));
+      return errors;
+    }
+
+    async function sendEnquiry(data) {
+      const res = await fetch(FORMSUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `New enquiry from ${data.name}`,
+          _template: "table",
+          _captcha: "false",
+          Name: data.name,
+          Email: data.email,
+          Service: data.service,
+          Message: data.message,
+        }),
+      });
+      if (!res.ok) throw new Error(`FormSubmit failed: ${res.status}`);
+      const json = await res.json();
+      if (String(json.success) === "false") throw new Error(json.message || "FormSubmit rejected the enquiry");
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = Object.fromEntries(
+        ["name", "email", "service", "message"].map((k) => [k, form.elements[k].value.trim()])
+      );
+      const errors = validate(data);
+      const first = Object.keys(errors)[0];
+      if (first) { document.getElementById(first).focus(); return; }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+      statusEl.className = "form-status";
+      statusEl.textContent = "";
+      try {
+        await sendEnquiry(data);
+        form.reset();
+        statusEl.className = "form-status ok";
+        statusEl.textContent = "Thank you! Your enquiry has been sent.";
+      } catch (err) {
+        console.warn(err);
+        statusEl.className = "form-status fail";
+        statusEl.textContent = "Sorry, your enquiry could not be sent. Please try again later.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send Enquiry";
+      }
+    });
+  </script>
+</body>
+</html>
